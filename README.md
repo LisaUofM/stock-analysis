@@ -160,10 +160,10 @@ For j = 2 To RowCount
 ### Summary 
 
 #### Advantages and Disadvantages of Refactoring Code in general
-An advantage of refactoring code is that it reduces runtimees by making the code more efficient. If there are several processes in a batch, and the stocks analysis is one process, refactoring is an advantage, especially if the dataset is expected to increase. 
+An advantage of refactoring code is that it reduces runtimes by making the code more efficient. If there are several processes in a batch, and the stocks analysis is one process, refactoring is an advantage, especially if the dataset is expected to increase. 
 
-If the dataset is small and the only batch process (like Steve's analysis of 12 stocks), the orignal code could be used without issue. Setting up another subroutine or fixing an existing subroutine for minimal rows of data can be labor intensive and unneccessary. 
+If the dataset is small and the only batch process (like Steve's analysis of 12 stocks), the orignal code could be used without issue. Setting up another subroutine or fixing an existing subroutine for minimal rows of data can be labor intensive and unneccessary.  
 
 #### Advantages and Disadvantages of the original and refactored VBA script
 
-Advantages are that the runtimes were significantly reduced so the script is more capable of running a larger dataset. Disadvantages are that, while the script became more efficient in producing an output, it required more keystrokes in the coding process. For example, the "ticker" variable became "tickerIndex," the "volumes" became the "tickerVolumes," the "startingPrices" became the "tickerStartingPrices." Additional keystrokes makes the code more vulnerable to human error and, as a result, could make the debugging process more time consuming.  
+Advantages are that the runtimes are significantly reduced so the script is more capable of running a larger dataset. Disadvantages are that, while the script became more efficient in producing an output, it required more keystrokes in the coding process. For example, the "ticker" variable became "tickerIndex," the "volumes" became the "tickerVolumes," the "startingPrices" became the "tickerStartingPrices" etc.  Additional keystrokes make the code more vulnerable to human error and, as a result, could make the debugging process more time-consuming.  
