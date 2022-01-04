@@ -1,5 +1,3 @@
-# stock-analysis
-Module 2: VBA assignment
 # VBA Module 2 Challenge
 
 ## Refactoring Stocks Analysis
@@ -18,7 +16,7 @@ The purpose of this project is to demonstrate how we have refactored the VBA Cod
 
 A macro for the initial analysis was created under subroutine "AllStocksAnalysis" in the file **green_stocks**. The runtime for retrieving stocks data for 2017 was 0.4960938 seconds. The runtime for retrieving stocks data for 2018 was .5039062 seconds. 
 
-The original code included six primary steps (summarized to show differences between the original and refactored code): 
+The original code included six primary steps (summarized to compare the original and refactored code): 
 
 (1) Formatting the output sheet with a header row that includes Ticker, Daily Volume and Return 
 ```
@@ -26,18 +24,78 @@ Cells(3,1).Value = "Ticker"
 Cells(3,2).Value = "Total Daily Volume" 
 Cells(3,3).Value = "Return" 
 ```
-(2) Initializing an array of tickers 
+(2) Initializing an array of tickers
+
+Dim tickers(11) As String
+       
+tickers(0) = "AY"
+tickers(1) = "CSIQ"
+tickers(2) = "DQ"
+tickers(3) = "ENPH"
+tickers(4) = "FSLR"
+tickers(5) = "HASI"
+tickers(6) = "JKS"
+tickers(7) = "RUN"
+tickers(8) = "SEDG"
+tickers(9) = "SPWR"
+tickers(10) = "TERP"
+tickers(11) = "VSLR"
 
 (3) Preparing the data for analysis 
+```
+Dim startingPrice As Single
+Dim endingPrice As Single
 
-(4) Looping through the tickers using a "for" loop 
+Sheets(yearValue.Activate)
 
-(5) Creating a nested loop to loop through the rows in the data to find and store the total volume, the starting price and the ending price using If statements 
+RowCount = Cells(Rows.Count,"A").End(xlUp).Row
+```
+(4) Looping through the tickers using a "for" loop and setting totalVolume to 0 
+```
+For i = 0 to 11
+ticker=tickers(i)
+totalVolume = 0 
+```
 
-(6) Outputing the data for each of the 12 stock tickers. 
+(5) Creating a nested loop to loop through the rows in the data to find the total volume, the starting price and the ending price using If statements and, lastly, closing the nested loop.
+
+```
+Worksheets(yearValue).Activate
+For j = 2 To RowCount
+
+If Cells(j, 1).Value = ticker Then
+          
+ totalVolume = totalVolume + Cells(j, 8).Value
+                
+End If
+
+If Cells(j - 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then
+         
+ startingPrice = Cells(j, 6).Value
+            
+End If
+If Cells(j + 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then
+        
+ endingPrice = Cells(j, 6).Value
+                   
+End If
+
+Next j
+```
+(6) Outputing the data for each of the 12 stock tickers and closing the first loop. 
+```
+Worksheets("All Stocks Analysis").Activate
+  Cells(4 + i, 1).Value = ticker
+  Cells(4 + i, 2).Value = totalVolume
+  Cells(4 + i, 3).Value = endingPrice / startingPrice - 1
+           
+Next i
+```
 
 #### Refactored Analysis 
 A macro with the refactored analysis was created under subroutine "AllStocksAnalsysRefactored" in the file **Vba_Challenge**. The runtime for retrieving stocks data for 2017 was 0.4375 seconds, increasing runtime speed by **12%** (0.4961-0.4375)/0.4961. The runtime for retrieving stock data for 2018 was 0.4335938 seconds, increasing runtime speed by **14%**(0.5039062-0.4335938)/0.5039062. 
+
+
 
 #### 
 
