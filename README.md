@@ -25,7 +25,7 @@ Cells(3,2).Value = "Total Daily Volume"
 Cells(3,3).Value = "Return" 
 ```
 (2) Initializing an array of tickers
-
+```
 Dim tickers(11) As String
        
 tickers(0) = "AY"
@@ -40,7 +40,7 @@ tickers(8) = "SEDG"
 tickers(9) = "SPWR"
 tickers(10) = "TERP"
 tickers(11) = "VSLR"
-
+```
 (3) Preparing the data for analysis 
 ```
 Dim startingPrice As Single
