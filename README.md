@@ -100,9 +100,9 @@ Next i
 #### Refactored Analysis 
 A macro with the refactored analysis was created under subroutine "AllStocksAnalsysRefactored" in the file **Vba_Challenge**. The runtime for retrieving stocks data for 2017 was 0.4375 seconds, increasing runtime speed by **12%** (0.4961-0.4375)/0.4961. The runtime for retrieving stock data for 2018 was 0.4335938 seconds, increasing runtime speed by **14%**(0.5039062-0.4335938)/0.5039062. 
 
-![Runtime for refactored 2017 analysis](https://github.com/LisaUofM/stock-analysis/issues/4#issue-1092895359)
+![VBA_Challenge refactored 2017 analysis](https://github.com/LisaUofM/stock-analysis/issues/4#issue-1092895359)
 
-![Runtime for refactored 2018 analysis](https://github.com/LisaUofM/stock-analysis/issues/3#issue-1092895025)
+![VBA_Challange refactored 2018 analysis](https://github.com/LisaUofM/stock-analysis/issues/3#issue-1092895025)
 
 The key differences between the original and refactored code are the use of a tickerIndex and the definition of tickerIndex variables (tickerVolumes, tickerStartingPrices and tickerEndingPrices) as arrays. Using tickerIndex to find, store and return these variables resulted in reduced runtimes of 12% and 14% mentioned in the paragraph above. 
 
@@ -160,7 +160,7 @@ For j = 2 To RowCount
 ### Summary 
 
 #### Advantages and Disadvantages of Refactoring Code in general
-An advantage of refactoring code is that it reduces runtimes by making the code more efficient. If there are several processes in a batch, and the stocks analysis is one process, refactoring is an advantage, especially if the dataset is expected to increase. 
+An advantage of refactoring code is that it reduces runtimes by making the code more efficient. If there are several processes in a batch, and the stocks analysis is one process, refactoring is an advantage, especially if the dataset is expected to increase. For example, if we were to run the refactored code on stocks in the Russell 2000, we would save 9.5 and 11.4 seconds for each year respectively. https://github.com/LisaUofM/stock-analysis/issues/5#issue-1093594763
 
 If the dataset is small and the only batch process (like Steve's analysis of 12 stocks), the orignal code could be used without issue. Setting up another subroutine or fixing an existing subroutine for minimal rows of data can be labor intensive and unneccessary.  
 
