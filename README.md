@@ -5,10 +5,10 @@
 ### Overview of Project
 The VBA module challenge features a new client, Steve. Steve has requested an analysis of green stocks, their volumes and their returns. We have used VBA code to create indexes, loops, conditionals and formatting to produce a succinct view of green stocks. https://github.com/LisaUofM/stock-analysis/blob/main/green_stocks.xlsm. 
 
-Steve's next request is to expand the dataset to include entire stock market, so we have subsequently refactored the code for scaling the analysis to a larger population of stocks. 
+Steve's next request is to expand the dataset to include entire stock market, so we have subsequently refactored the code for scaling the analysis to a larger population of stocks.https://github.com/LisaUofM/stock-analysis/blob/main/VBA_Challenge.xlsm 
 
 #### Purpose
-The purpose of this project is to demonstrate how we have refactored the VBA Code and its effectiveness in reducing runtimes in preparation for larger data sets. 
+The purpose of this project is to refactor VBA Code of a stock analysis and demonstrate its effectiveness in reducing runtimes to prepare for larger data sets. 
 
 ### Results 
 
@@ -16,7 +16,12 @@ The purpose of this project is to demonstrate how we have refactored the VBA Cod
 
 A macro for the initial analysis was created under subroutine "AllStocksAnalysis" in the file **green_stocks**. The runtime for retrieving stocks data for 2017 was 0.4960938 seconds. The runtime for retrieving stocks data for 2018 was .5039062 seconds. 
 
-The original code included six primary steps (summarized to compare the original and refactored code): 
+![Runtime for 2017 stock analysis](https://github.com/LisaUofM/stock-analysis/issues/2)
+
+![Runtime for 2018 stock analysis](https://github.com/LisaUofM/stock-analysis/issues/1)
+
+
+The original code included six key steps (summarized to compare the original and refactored code): 
 
 (1) Formatting the output sheet with a header row that includes Ticker, Daily Volume and Return 
 ```
