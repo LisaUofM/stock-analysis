@@ -5,7 +5,7 @@
 ### Overview of Project
 The VBA module challenge features a new client, Steve. Steve has requested an analysis of green stocks, their volumes and their returns. We have used VBA code to create indexes, loops, conditionals and formatting to produce a succinct view of green stocks. https://github.com/LisaUofM/stock-analysis/blob/main/green_stocks.xlsm. 
 
-Steve's next request is to expand the dataset to include entire stock market, so we have subsequently refactored the code for scaling the analysis to a larger population of stocks.https://github.com/LisaUofM/stock-analysis/blob/main/VBA_Challenge.xlsm 
+Steve's next request is to expand the dataset to include entire stock market, so we have subsequently refactored the code for scaling the analysis to a larger population of stocks. https://github.com/LisaUofM/stock-analysis/blob/main/VBA_Challenge_v2.xlsm
 
 #### Purpose
 The purpose of this project is to refactor VBA Code of a stock analysis and demonstrate its effectiveness in reducing runtimes to prepare for larger data sets. 
@@ -14,7 +14,7 @@ The purpose of this project is to refactor VBA Code of a stock analysis and demo
 
 #### Original Analysis 
 
-A macro for the initial analysis was created under subroutine "AllStocksAnalysis" in the file **green_stocks**. The runtime for retrieving stocks data for 2017 was 0.4960938 seconds. The runtime for retrieving stocks data for 2018 was .5039062 seconds. 
+A macro for the initial analysis was created under subroutine "AllStocksAnalysis" in the file **green_stocks**. The runtime for retrieving stocks data for 2017 was 0.4960938 seconds. The runtime for retrieving stocks data for 2018 was 0.5039062 seconds. 
 
 ![Runtime for 2017 stock analysis](https://github.com/LisaUofM/stock-analysis/issues/2#issue-1092894322)
 
@@ -98,59 +98,57 @@ Next i
 ```
 
 #### Refactored Analysis 
-A macro with the refactored analysis was created under subroutine "AllStocksAnalsysRefactored" in the file **Vba_Challenge**. The runtime for retrieving stocks data for 2017 was 0.4375 seconds, increasing runtime speed by **12%** (0.4961-0.4375)/0.4961. The runtime for retrieving stock data for 2018 was 0.4335938 seconds, increasing runtime speed by **14%**(0.5039062-0.4335938)/0.5039062. 
+A macro with the refactored analysis was created under subroutine "AllStocksAnalsysRefactored" in the file **Vba_Challenge**. The runtime for retrieving stocks data for 2017 was 0.06640625, increasing runtime speed by **87%** (0.4961-0.06640625)/0.4961. The runtime for retrieving stock data for 2018 was 0.0675 seconds, increasing runtime speed by **87%**(0.5039062-0 0675)/0.5039062. 
 
-![VBA_Challenge refactored 2017 analysis](https://github.com/LisaUofM/stock-analysis/issues/4#issue-1092895359)
+![Runtime for refactored 2017 analysis](https://github.com/LisaUofM/stock-analysis/issues/6#issue-1097032060)
 
-![VBA_Challange refactored 2018 analysis](https://github.com/LisaUofM/stock-analysis/issues/3#issue-1092895025)
+![Runtime for refactored 2018 analysis](https://github.com/LisaUofM/stock-analysis/issues/7#issue-1097032340)
 
-The key differences between the original and refactored code are the use of a tickerIndex and the definition of tickerIndex variables (tickerVolumes, tickerStartingPrices and tickerEndingPrices) as arrays. Using tickerIndex to find, store and return these variables resulted in reduced runtimes of 12% and 14% mentioned in the paragraph above. 
+The key differences between the original and refactored code are the use of a tickerIndex and the definition of tickerIndex variables as arrays (tickerVolumes(12), tickerStartingPrices(12) and tickerEndingPrices(12) as arrays. Using tickerIndex to find, store and return these variables resulted in reduced runtimes of 87% and 87% mentioned in the paragraph above. 
 
-To compare and explain the differences between the original and refactored code, below are four key steps used in the refactoring.
+There are four key changes to the original code (1) created a tickerIndex, (2) set the variables as Arrays and (3) created a for loop to set the tickerVolumes to 0(4) and another for loop to retrieve the tickerVolumes, tickerStartingPrices and the tickerEndingPrices. No nested loop is used. 
+
 
 (1) Creation of a ticker index from the array of tickers used in step 2 of the original analysis.  
 ```
-For i = 0 To 11
-  **tickerIndex** = tickers(i)
+tickerIndex = 0
+
 ```
 (2) Creation of three output arrays for the Volumes, StartingPrices and EndingPrices variables. (Compare with step three of the original analysis.)
 ```
-Dim tickerVolumes As Long
-Dim tickerStartingPrices As Single
-Dim tickerEndingPrices As Single
+Dim tickerVolumes(12) As Long
+Dim tickerStartingPrices(12) As Single
+Dim tickerEndingPrices(12) As Single
 ```
-(3) In the nested loop, setting ticker volumes to "0" and increasing the volume by using the tickerIndex variable as the index. Compare with step five of the original analysis. 
+(3) Created a for loop to set the ticker Volumes to 0. 
 ```
-Worksheets(yearValue).Activate
- **tickerVolumes = 0**
-
-If Cells(j, 1).Value = tickerIndex Then
-**tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(j, 8).Value**
-```
-(4) For each If statement, to find and store the tickerVolume, the tickerStartingPrices and the tickerEndingPrices, the tickerIndex variable is used. 
+For j = 0 To 11
+  tickerVolumes(j) = 0
+Next j
 
 ```
-For j = 2 To RowCount
+(4) Created another for loop to retrieve the tickerVolumes, tickerStartingPrices and the tickerEndingPrices. 
+
+```
+For i = 2 To RowCount
   
-  If Cells(j, 1).Value = **tickerIndex** Then
+  If Cells(i, 1).Value = **tickerIndex** Then
         
     tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(j, 8).Value
        
   End If
         
-  If Cells(j - 1, 1).Value <> **tickerIndex** And Cells(j, 1).Value = **tickerIndex** Then
+  If Cells(i - 1, 1).Value <> **tickerIndex** And Cells(j, 1).Value = **tickerIndex** Then
             
-    tickerStartingPrices = Cells(j, 6)
+    tickerStartingPrices(tickerIndex) = Cells(j, 6)
     
   End If
         
-  If Cells(j + 1, 1).Value <> **tickerIndex** And Cells(j, 1).Value = **tickerIndex** Then
+  If Cells(i + 1, 1).Value <> **tickerIndex** And Cells(j, 1).Value = **tickerIndex** Then
         
-  tickerEndingPrices = Cells(j, 6)
+  tickerEndingPrices(tickerIndex) = Cells(j, 6)
             
   End If
-    
-    Next j
     
     Next i
 ```
@@ -160,10 +158,11 @@ For j = 2 To RowCount
 ### Summary 
 
 #### Advantages and Disadvantages of Refactoring Code in general
-An advantage of refactoring code is that it reduces runtimes by making the code more efficient. If there are several processes in a batch, and the stocks analysis is one process, refactoring is an advantage, especially if the dataset is expected to increase. For example, if we were to run the refactored code on stocks in the Russell 2000, we would save 9.5 and 11.4 seconds for each year respectively. https://github.com/LisaUofM/stock-analysis/issues/5#issue-1093594763
+An advantage of refactoring code is that it reduces runtimes by making the code more efficient. If there are several processes in a batch, and the stocks analysis is one process, refactoring is an advantage, especially if the dataset is expected to increase. For example, if we were to run the refactored code on stocks in the Russell 2000, we would save 70 and 71 seconds for each year respectively. https://github.com/LisaUofM/stock-analysis/issues/8#issue-1097034914
 
 If the dataset is small and the only batch process (like Steve's analysis of 12 stocks), the orignal code could be used without issue. Setting up another subroutine or fixing an existing subroutine for minimal rows of data can be labor intensive and unneccessary.  
 
 #### Advantages and Disadvantages of the original and refactored VBA script
 
 Advantages are that the runtimes are significantly reduced so the script is more capable of running a larger dataset. Disadvantages are that, while the script became more efficient in producing an output, it required more keystrokes in the coding process. For example, the "ticker" variable became "tickerIndex," the "volumes" became the "tickerVolumes," the "startingPrices" became the "tickerStartingPrices" etc.  Additional keystrokes make the code more vulnerable to human error and, as a result, could make the debugging process more time-consuming.  
+
